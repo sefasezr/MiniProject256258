@@ -38,6 +38,7 @@ Project: Bilet Rezervasyon ve Bilet Fiyatı Hesaplama Uygulaması
             //1-bilet ve otobüs objelerini oluşturalım
             Bus bus = new Bus("34 TPE 789", 33);
             //plaka:"34 TPE 789", koltuk sayısı:33, koltuklar:1,2,3,...,33
+            //new
 
 
         }
