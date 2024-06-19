@@ -5,24 +5,24 @@ import java.util.List;
 
 public class Bus {
 
-    //2-plaka, koltuk sayısı, koltuk numaraları
-    private String numberPlate;//34 TPE 69
+    //2-plaka,koltuk sayısı, koltuk numaraları
 
-    private int numberOfSeat;//33
+    private String numberPlate;   //34 TPE 69
+    private int numberOfSeat;  //33
+    private List<String> seats = new ArrayList<>();//"1","2","3"...
 
-    private List<String> seats=new ArrayList<>();//"1","2","3","4"..."33"
+    //3-paramli const:otobus objesini oluşturduğumda öz.leri belli olsun
 
-    //3-paramli const:otobüs objesini oluşturduğumda öz.leri belli olsun
-    public Bus(String plaka, int numberOfSeat) {
-        this.numberPlate = plaka;//34 TPE 789
-        this.numberOfSeat = numberOfSeat;//33
-        for (int i=1;i<=numberOfSeat;i++){
-            //this.seats.add(String.valueOf(i));
-            this.seats.add(i+"");
+    public Bus(String numberPlate, int numberOfSeat) {
+        this.numberPlate = numberPlate;  //34 TPE 69
+        this.numberOfSeat = numberOfSeat; //33
+        for (int i = 1; i <= numberOfSeat; i++) {
+            this.seats.add(String.valueOf(i));
+            //this.seats.add(i+"");
         }
     }
 
-    //getter:değerlerin okunmasını sağlar
+    //getter: değerlerin okunmasını sağlar
 
 
     public String getNumberPlate() {
