@@ -4,30 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bus {
-    private String numberOfPlate;
-    private int numberOfSeat;
-    private List<String> seats = new ArrayList<>();
+    private String plaka;
+    private List<String> koltuklar = new ArrayList<String>();
+    private int koltukSayisi;
 
-    public Bus(String numberOfPlate , int numberOfSeat) {
-        this.numberOfPlate = numberOfPlate;
-        this.numberOfSeat = numberOfSeat;
 
-        for(int i = 1; i<=numberOfSeat;i++){
-            this.seats.add(i+"");
+    public Bus(String plaka, int koltukSayisi) {
+        this.plaka = plaka;
+        this.koltukSayisi = koltukSayisi;
+        for (int i = 1 ; i <= koltukSayisi; i++) {
+            this.koltuklar.add(String.valueOf(i));
         }
     }
 
-    public String getNumberOfPlate() {
-        return numberOfPlate;
+    public String getPlaka() {
+        return plaka;
     }
 
-    public int getNumberOfSeat() {
-        return numberOfSeat;
+    public List<String> getKoltuklar() {
+        return koltuklar;
     }
 
-    public List<String> getSeats() {
-        return seats;
+    public int getKoltukSayisi() {
+        return koltukSayisi;
     }
 }
-
-

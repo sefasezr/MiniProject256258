@@ -8,47 +8,52 @@ public class TicketReservationApp {
     }
 
     private static void start() {
-
-        Bus bus = new Bus("41 UV 328",39);
-        Scanner scan = new Scanner(System.in);
+        Bus bus = new Bus("41 UV 328",38);
         Ticket ticket;
-        int select;
+
+        Scanner scan = new Scanner(System.in);
+        int secenek;
+
         do{
-            System.out.println("Lutfen isminizi giriniz : ");
+            //kullanıcıdan bilgileri alalım:
+            System.out.println("* Bilet Rezervasyon Sistemine Hoşgeldiniz *");
+            System.out.println("Lutfen ad-soyad giriniz : ");
             String name = scan.nextLine();
-            System.out.println("Lutfen KM giriniz       : ");
-            double km = scan.nextDouble();
-            System.out.println("Lutfen yasinizi giriniz : ");
+            System.out.println("Lutfen yaşınızı giriniz : ");
             int age = scan.nextInt();
-            System.out.println("Yolculuk turu giriniz   : ");
+            System.out.println("Lutfen gidilecek mesafeyi KM olarak giriniz : ");
+            double km = scan.nextDouble();
+            System.out.println("Lutfen yolculuk tipini giriniz : ");
             System.out.println("1-Tek Yön");
-            System.out.println("2-Çift Yön");
+            System.out.println("2-Gidiş-Dönüş");
             int type = scan.nextInt();
             scan.nextLine();
-            System.out.println("Lutfen koltuk no giriniz: ");
-            System.out.println("(3 ve kati olan numaralara %20 fazla ücret uygulanır!)");
-            System.out.println(bus.getSeats());
-            String seatNo = scan.nextLine();
+            System.out.println("Lütfen koltuk no giriniz : ");
+            System.out.println("(Tekli koltuk ücreti %20 daha fazladır!)");
+            System.out.println(bus.getKoltuklar());
+            String seat = scan.nextLine();
 
-            boolean isReserved = bus.getSeats().contains(seatNo);
-
-            if(age>0 && isReserved && (type==1||type==2) && km>0){
-                ticket = new Ticket(km,type,bus,seatNo);
+            boolean isReserved = !(bus.getKoltuklar().contains(seat));
+            if(km>0 && age>0 && (type==1||type==2)&& !isReserved){
+                ticket = new Ticket(bus,type,seat,km);
                 ticket.setPrice(age);
 
-                ticket.getBus().getSeats().remove(seatNo);
-                ticket.biletDokumuYazdirma(name);
+                ticket.getBus().getKoltuklar().remove(seat);
+                ticket.printTicket(name);
             }else{
-                if(!isReserved){
-                    System.out.println("Gecersiz Koltuk numarasi veya koltuk baskasi tarafindan rezerv edilmiş");
-                }else{
-                    System.out.println("Gecersiz tus girisi");
+                if(isReserved){
+                    System.out.println("Bilet rezerve edilmiş yada geçersiz koltuk no!");
+                }
+                else{
+                    System.out.println("Sayin "+name +" gecersiz giris yaptiniz");
                 }
             }
-            System.out.println("Isleme devam etmek istiyorsanız herhangi sayiyi tuslayin ÇIKIŞ için 0'i tuslayin");
-            select = scan.nextInt();
+            System.out.println("Cikiş yapmak icin 0'a basiniz devam etmek istiyorsaniz herhangi sayiya basiniz");
+            secenek = scan.nextInt();
             scan.nextLine();
-        }while (select!=0);
+
+        }while(secenek != 0);
+        System.out.println("İyi günler diler yeniden bekleriz...");
 
     }
 }

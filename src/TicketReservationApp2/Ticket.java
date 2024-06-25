@@ -2,92 +2,82 @@ package TicketReservationApp2;
 
 public class Ticket {
     private double distance;
-    private double price;
-    private int typeNo;
+
     private Bus bus;
-    private String seatNo;
 
-    public Ticket(double distance,int typeNo, Bus bus, String seatNo) {
-        this.distance = distance;
-        this.typeNo = typeNo;
+    private int gidisDonus; //1-tek yön 2- çift yön
+
+    private String koltukNo;
+
+    private double fiyat;
+
+    public Ticket(Bus bus, int gidisDonus, String koltukNo,double distance) {
         this.bus = bus;
-        this.seatNo = seatNo;
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getTypeNo() {
-        return typeNo;
+        this.gidisDonus = gidisDonus;
+        this.koltukNo = koltukNo;
+        this.distance = distance;
     }
 
     public Bus getBus() {
         return bus;
     }
 
-    public String getSeatNo() {
-        return seatNo;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
-    }
-
-    public void setPrice(int age) {
-        //Kendim yapacagim
-
-        double total=0;
-        int seatNo = Integer.valueOf(this.seatNo);
-        switch (this.typeNo){
-            case 1:
-                if(seatNo%3==0){
-                    total = distance*1.2;
-                }else{
-                    total = distance;
-                }
-                break;
-            case 2:
-                if(seatNo%3==0){
-                    total = distance*2*1.2;
-                }else{
-                    total = distance*2;
-                }
-                total = total*0.8;
-                break;
-        }
-        if(age<12){
-            total = distance * 0.5;
-        }else if (age>65){
-            total = distance * 0.7;
-        }
-        this.price = total;
-    }
-
-    public void setTypeNo(int typeNo) {
-        this.typeNo = typeNo;
-    }
-
     public void setBus(Bus bus) {
         this.bus = bus;
     }
-
-    public void setSeatNo(String seatNo) {
-        this.seatNo = seatNo;
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
-    public void biletDokumuYazdirma(String name){
+    public void setGidisDonus(int gidisDonus) {
+        this.gidisDonus = gidisDonus;
+    }
+    public void setKoltukNo(String koltukNo) {
+        this.koltukNo = koltukNo;
+    }
+
+
+    public void setPrice (int yas){
+        //buradaki hesaplamalari kendimiz yapacağiz
+        double total=0;
+        int seat = Integer.valueOf(this.koltukNo);
+        switch (this.gidisDonus){
+            case 1:
+                if(seat%3==0){  //tekli koltuk
+                    total = this.distance*1*1.2;
+                }else {
+                    total = this.distance*1;
+                }
+                System.out.println("Toplam tutar : "+total);
+                break;
+            case 2:
+                if(seat%3==0){
+                    total = this.distance*2*1.2;
+                }else{
+                    total = this.distance*2;
+                }
+                System.out.println("Toplam tutar : "+total);
+                total = total - total*0.2;
+                System.out.println("Çift yön indirimli tutar : "+total);
+                break;
+        }
+        if(yas<12){
+            total = total*0.5;
+            System.out.println("12 yaş indirimli tutar : "+total);
+        }else if (yas>65){
+            total = total*0.7;
+            System.out.println("65 yaş indirimli tutar : "+total);
+        }
+        this.fiyat = total;
+    }
+    public void printTicket(String name){
         System.out.println("*".repeat(42));
         System.out.println("---- Bilet Detayı ----");
         System.out.println("Sayın "+name);
-        System.out.println("Otobus plakası : "+this.bus.getNumberOfPlate());
+        System.out.println("Otobus plakası : "+this.bus.getPlaka());
         System.out.println("Mesafe(KM)     : "+this.distance);
-        System.out.println("Yolculuk Tipi  : "+(this.typeNo==1?"Tek Yön":"Çift Yön"));
-        System.out.println("Koltuk No      : "+this.seatNo);
-        System.out.println("Toplam Tutar   : "+this.price);
+        System.out.println("Yolculuk Tipi  : "+(this.gidisDonus==1?"Tek Yön":"Çift Yön"));
+        System.out.println("Koltuk No      : "+this.koltukNo);
+        System.out.println("Toplam Tutar   : "+this.fiyat);
         System.out.println("Keyifli Yolculuklar Dileriz...");
         System.out.println("*".repeat(42));
     }
