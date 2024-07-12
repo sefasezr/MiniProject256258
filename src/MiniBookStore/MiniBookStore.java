@@ -32,18 +32,32 @@ public class MiniBookStore {
             System.out.println("Ürün Yönetim Paneli");
             System.out.println("1-Kitaplar");
             System.out.println("2-Defterler");
+            System.out.println("3-Kalemler");
             System.out.println("0-Çıkış");
             System.out.println("Seçiminiz: ");
             select = scan.nextInt();
             //ProductService i referans alarak service oluştur
-            ProductService service = select==1 ? new BookService() : new NotebookService();
+            ProductService service;
 
-            if(select==1 || select==2){
-                service.processMenu();
-            }else if (select==0){
-                System.out.println("İyi günler...");
-            }else{
-                System.out.println("Hatalı giriş");
+            switch (select){
+                case 1:
+                    service = new BookService();
+                    service.processMenu();
+                    break;
+                case 2:
+                    service = new NotebookService();
+                    service.processMenu();
+                    break;
+                case 3:
+                    service = new PencilService();
+                    service.processMenu();
+                    break;
+                case 0:
+                    System.out.println("Çıkış yapılıyor");
+                    break;
+                default:
+                    System.out.println("Geçersiz işlem girişi tekrar deneyiniz");
+                    break;
             }
         }
     }
