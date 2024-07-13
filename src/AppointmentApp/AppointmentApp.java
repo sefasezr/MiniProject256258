@@ -1,5 +1,6 @@
 package AppointmentApp;
 
+
 import java.util.Scanner;
 
 /*
@@ -29,32 +30,38 @@ public class AppointmentApp {
     public static void main(String[] args) {
         start();
     }
-    //1-Ana menü oluştur
-    //2-doctor, appointment classlarını oluştur
-    private static void start() {
-        Scanner scan = new Scanner(System.in);
-        int select =-1;
-        while(select!=0){
-            System.out.println("Merhaba, randevu sistemine hoşgeldiniz...");
+    //1-ana menü oluştur.
+    //2-doctor,appointment classlarını oluştur
+    public static void start() {
+        Scanner scan  = new Scanner(System.in);
+        AppointmentService appointmentService = new AppointmentService();
+        DoctorService doctorService = new DoctorService();
+        System.out.println("Merhaba, randevu sistemine hoşgeldiniz...");
+        int select;
+        do {
             System.out.println("1-Randevu al");
             System.out.println("2-Randevu görüntüle");
-            System.out.println("0-Çıkış");
-            select=scan.nextInt();
-            switch(select){
+            System.out.println("0-ÇIKIŞ");
+            System.out.print("Seçiminiz");
+            select = scan.nextInt();
+            scan.nextLine();
+            switch (select) {
                 case 1:
-                    //randevu oluşturma
+                    appointmentService.getAppointment(doctorService);
                     break;
                 case 2:
-                    //randevuyu yazdır
+                    appointmentService.printApp();
                     break;
                 case 0:
-                    System.out.println("İyi günler dileriz");
+                    System.out.println("İyi günler dileriz...");
                     break;
                 default:
                     System.out.println("Hatalı giriş, tekrar deneyiniz!");
                     break;
             }
-        }
+
+        }while(select!=0);
+
 
     }
 }
